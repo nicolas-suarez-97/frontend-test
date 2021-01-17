@@ -1,0 +1,23 @@
+@import '../../App.scss';
+
+.breadcrum {
+    font-size: 14px;
+    font-family: $font-family;
+    display: flex;
+    align-items: center;
+    margin: 16px 0px;
+
+    &__item {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        color: $carbon-400;
+        cursor: pointer;
+    }
+    &__last {
+        font-weight: bold;
+        text-decoration: none;
+        color: $carbon-400;
+        cursor: pointer;
+    }
+}

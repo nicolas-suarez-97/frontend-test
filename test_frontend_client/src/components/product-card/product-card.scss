@@ -1,0 +1,56 @@
+@import '../../App.scss';
+
+.product {
+    display: flex;
+    color: $carbon-900;
+    font-family: $font-family;
+    cursor: pointer;
+
+    &__image {
+        height: 180px;
+        width: 180px;
+        margin: 16px;
+        border-radius: 4px;
+    }
+
+    &__content {
+        display: flex;
+        position: relative;
+        width: 100%;
+
+        &__details {
+            display: flex;
+            flex-direction: column;
+            margin-top: 32px;
+            &__info {
+                display: flex;
+                align-items: center;
+                margin-bottom: 32px;
+                &__amount {
+                    margin-right: 16px;
+                    font-size: 24px;
+                }
+
+                &__shipping {
+                    height: 20px;
+                }
+            }
+
+            &__description {
+                font-size: 18px;
+            }
+
+            &__condition {
+                font-size: 18px;
+            }
+        }
+
+        &__location {
+            font-size: 12px;
+            color: $carbon-700;
+            position: absolute;
+            right: 60px;
+            top: 60px;
+        }
+    }
+}
