@@ -27,7 +27,7 @@ const ProductDetail = () => {
     const product = useSelector( state => state.items.item);
     const error = useSelector( state => state.items.error);
     return ( 
-        <section className="container">
+        <section className="container" data-testid="main-section">
             {!loading && !error ?
                 <MetaTags>
                     <title>{product.title}</title>

@@ -9,11 +9,11 @@ const BreadcrumComponent = ({steps}) => {
         window.location.reload();
     }
     return ( 
-        <ul className="breadcrum">
+        <ul className="breadcrum" data-testid="breadcrum">
            {steps.map(step => (
                step !== steps[steps.length-1] 
                ? <li key={step} className="breadcrum__item" onClick={() => submitQuery(step)}>{step} <i className="material-icons">keyboard_arrow_right</i></li>
-               : <li key={step} className="breadcrum__last" onClick={() => submitQuery(step)}>{step}</li>
+               : <li key={step} className="breadcrum__last" onClick={() => submitQuery(step)} data-testid="last-item">{step}</li>
            ))}
         </ul>
      );

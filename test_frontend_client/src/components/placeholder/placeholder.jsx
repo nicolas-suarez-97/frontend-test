@@ -3,7 +3,7 @@ import './placeholder.scss';
 
 const PlaceholderComponent = () => {
     return ( 
-        <div className="placeholder"></div>
+        <div className="placeholder" data-testid="placeholder"></div>
      );
 }
  

@@ -29,7 +29,7 @@ const SearchResult = () => {
     const error = useSelector( state => state.items.error);
 
     return ( 
-        <main className="container">
+        <main className="container" data-testid="main-section">
             <MetaTags>
                 <title>{query}</title>
                 <meta name="description" content={`Búsqueda de ${query}`}/>

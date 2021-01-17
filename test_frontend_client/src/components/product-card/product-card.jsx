@@ -17,7 +17,7 @@ const ProductCardComponent = ({ product }) => {
             <div className="product__content">
                 <div className="product__content__details">
                     <div className="product__content__details__info">
-                        <h2 className="product__content__details__info__amount">
+                        <h2 className="product__content__details__info__amount" >
                             <CurrencyFormat
                                 value={product.price.amount}
                                 prefix={'$ '}
@@ -25,14 +25,15 @@ const ProductCardComponent = ({ product }) => {
                                 displayType={'text'}
                                 decimalScale={product.price.decimals}
                                 fixedDecimalScale={true}
+                                data-testid="amount"
                             ></CurrencyFormat>
                         </h2>
                         {product.free_shipping ? (
                             <img className="product__content__details__info__shipping" src={shipping} alt="Shipping logo" />
                         ) : null}
                     </div>
-                    <p className="product__content__details__description">{product.title}</p>
-                    <p className="product__content__details__condition">{product.description}</p>
+                    <p className="product__content__details__description" data-testid="title">{product.title}</p>
+                    <p className="product__content__details__condition" data-testid="description">{product.description}</p>
                 </div>
                 <p className="product__content__location">{product.location}</p>
             </div>

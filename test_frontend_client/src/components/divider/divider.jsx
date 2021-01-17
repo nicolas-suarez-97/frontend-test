@@ -3,7 +3,7 @@ import './divider.scss';
 
 const DividerComponent = () => {
     return ( 
-        <div className="divider"></div>
+        <div className="divider" data-testid="divider"></div>
      );
 }
  
