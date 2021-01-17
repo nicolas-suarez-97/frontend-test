@@ -11,6 +11,12 @@ const ProductCardComponent = ({ product }) => {
         history.push(`/items/${product.id}`);
     }
 
+      
+    const condition = {
+        'used': 'Usado',
+        'new':'Nuevo'
+    };
+
     return (
         <div className="product" onClick={detailPage}>
             <img src={product.picture} alt="Imagen producto" className="product__image" />
@@ -33,7 +39,7 @@ const ProductCardComponent = ({ product }) => {
                         ) : null}
                     </div>
                     <p className="product__content__details__description" data-testid="title">{product.title}</p>
-                    <p className="product__content__details__condition" data-testid="description">{product.description}</p>
+                    <p className="product__content__details__condition" data-testid="description">{condition[product.condition]}</p>
                 </div>
                 <p className="product__content__location">{product.location}</p>
             </div>
