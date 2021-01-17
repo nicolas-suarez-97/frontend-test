@@ -5,6 +5,8 @@ import CurrencyFormat from 'react-currency-format';
 import {useParams} from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import {getItemByIdAction} from '../../store/actions/itemsActions';
+import MetaTags from 'react-meta-tags';
+import ErrorComponent from '../../components/error/error';
 
 const ProductDetail = () => {
     let {id} = useParams();
@@ -13,17 +15,28 @@ const ProductDetail = () => {
     useEffect(() => {
         const getItemById = (id) => dispatch( getItemByIdAction(id) );
         getItemById(id);
-    }, [])
+    }, [id, dispatch])
     
+    const condition = {
+        'used': 'Usado',
+        'new':'Nuevo'
+    };
     
     const loading = useSelector( state => state.items.loading);
-    const product = useSelector( state => state.items.item);
     const categories = useSelector( state => state.items.categories);
+    const product = useSelector( state => state.items.item);
+    const error = useSelector( state => state.items.error);
     return ( 
-        <div className="container">
+        <section className="container">
+            {!loading && !error ?
+                <MetaTags>
+                    <title>{product.title}</title>
+                    <meta name="description" content={product.description}/>
+                </MetaTags>
+            : null}
             <div className="container__content">
                 <BreadcrumComponent steps={categories}></BreadcrumComponent>
-                {loading !== true ? 
+                {!loading && !error? 
                 
                     <div className="container__content__product">
                         <div className="container__content__product__firstCol">
@@ -32,19 +45,19 @@ const ProductDetail = () => {
                                 src={product.picture} 
                                 alt="Imagen producto"
                             />
-                            <div className="container__content__product__firstCol__label">Descripción del producto</div>
-                            <div className="container__content__product__firstCol__description">
+                            <h1 className="container__content__product__firstCol__label">Descripción del producto</h1>
+                            <p className="container__content__product__firstCol__description">
                                 {product.description}
-                            </div>
+                            </p>
                         </div>
                         <div className="container__content__product__secondCol">
-                            <div className="container__content__product__secondCol__sold">
-                                {product.condition} - {product.sold_quantity} vendidos
-                            </div>
-                            <div className="container__content__product__secondCol__title">
+                            <h4 className="container__content__product__secondCol__sold">
+                                {condition[product.condition]} - {product.sold_quantity} vendidos
+                            </h4>
+                            <h2 className="container__content__product__secondCol__title">
                                 {product.title}
-                            </div>
-                            <div className="container__content__product__secondCol__amount">
+                            </h2>
+                            <h1 className="container__content__product__secondCol__amount">
                                 {product.price===undefined? null :
                                     <CurrencyFormat
                                         value={product.price.amount}
@@ -55,13 +68,14 @@ const ProductDetail = () => {
                                         fixedDecimalScale={true}
                                     ></CurrencyFormat>
                                 }
-                            </div>
+                            </h1>
                             <button className="container__content__product__secondCol__button">Comprar</button>
                         </div>
                     </div>
                 : null}
+                {error ? <ErrorComponent/>:null}
             </div>
-        </div>
+        </section>
      );
 }
 

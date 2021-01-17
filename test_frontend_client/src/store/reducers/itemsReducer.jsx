@@ -18,7 +18,7 @@ const initialState = {
 }
 
 
-export default function(state = initialState, action) {
+const itemsReducer = (state = initialState, action) => {
     switch(action.type) {
         case SET_QUERY: 
             return {
@@ -52,7 +52,7 @@ export default function(state = initialState, action) {
             return {
                 ...state,
                 loading: true,
-                item: null
+                item: {}
             }
         case GET_ITEM_BY_ID_SUCCESS:
             return {
@@ -65,3 +65,5 @@ export default function(state = initialState, action) {
             return state;
     }
 }
+
+export default itemsReducer;

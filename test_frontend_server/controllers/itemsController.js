@@ -63,6 +63,7 @@ exports.getItemById = async (req,res) => {
                 picture: apiResponse.data.pictures[0].url,
                 condition: apiResponse.data.condition,
                 free_shipping: apiResponse.data.shipping.free_shipping,
+                sold_quantity: apiResponse.data.sold_quantity,
                 description: apiDescriptionResponse.data.plain_text
             }
         };

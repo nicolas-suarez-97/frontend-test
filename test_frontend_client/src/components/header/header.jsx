@@ -33,10 +33,15 @@ const Header = () => {
                         placeholder={queryStore==='' ? "Nunca dejes de buscar" : queryStore}
                         value={query} 
                         name="query"
+                        aria-label="Campo de búsqueda"
                         className="header__content__searchBar__input"
                         onChange={e => setQuery(e.target.value)}
                     />
-                    <button className="header__content__searchBar__button" type="submit">
+                    <button 
+                        className="header__content__searchBar__button" 
+                        type="submit"
+                        aria-label="Botón búsqueda"
+                    >
                         <img src={searchLogo} alt="Search Logo" className="header__content__searchBar__button__img"/>
                     </button>
                 </form>

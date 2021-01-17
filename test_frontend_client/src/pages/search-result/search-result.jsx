@@ -6,36 +6,54 @@ import DividerComponent from '../../components/divider/divider';
 import {useLocation} from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import {getItemsAction} from '../../store/actions/itemsActions';
+import MetaTags from 'react-meta-tags';
+import PlaceholderComponent from '../../components/placeholder/placeholder';
+import ErrorComponent from '../../components/error/error';
+
 
 const SearchResult = () => {
 
-    let query = new URLSearchParams(useLocation().search);    
     const dispatch = useDispatch();
+    const queryParams = new URLSearchParams(useLocation().search);    
+    const query = queryParams.get('search').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     
     useEffect(() => {
         const getItems = (query) => dispatch( getItemsAction(query) );
-        getItems(query.get('search'));
-    }, [])
+        getItems(query);
+        
+    }, [query, dispatch])
 
-    const productList = useSelector( state => state.items.items);
+    const loading = useSelector( state => state.items.loading);
     const categories = useSelector( state => state.items.categories);
+    const productList = useSelector( state => state.items.items);
+    const error = useSelector( state => state.items.error);
 
     return ( 
-        <div className="container">
+        <main className="container">
+            <MetaTags>
+                <title>{query}</title>
+                <meta name="description" content={`Búsqueda de ${query}`}/>
+            </MetaTags>
             <div className="container__content">
                 <BreadcrumComponent steps={categories}></BreadcrumComponent>
-                <div className="container__content__products">
-                    {productList.map(p => (
-                        p !== productList[productList.length-1] 
-                        ? <Fragment key={p.id}>
-                            <ProductCardComponent product={p}></ProductCardComponent>
-                            <DividerComponent></DividerComponent>
-                        </Fragment>
-                        :  <Fragment key={p.id}><ProductCardComponent product={p}></ProductCardComponent></Fragment>
-                    ))}
-                </div>
+                {loading
+                ?
+                    <PlaceholderComponent></PlaceholderComponent>
+                :
+                    <section className="container__content__products">
+                        {productList.map(p => (
+                            p !== productList[productList.length-1] 
+                            ? <Fragment key={p.id}>
+                                <ProductCardComponent product={p}></ProductCardComponent>
+                                <DividerComponent></DividerComponent>
+                            </Fragment>
+                            :  <Fragment key={p.id}><ProductCardComponent product={p}></ProductCardComponent></Fragment>
+                        ))}
+                    </section>
+                }
+                {error? <ErrorComponent/>:null}
             </div>
-        </div>
+        </main>
      );
 }
 

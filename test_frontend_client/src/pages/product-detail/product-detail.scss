@@ -26,23 +26,31 @@ $local-max-width: 1140px;
                 &__image {
                     width: 680px;
                     height: 680px;
+                    max-height: 680px;
+                    max-width: 680px;
                     border-radius: 4px;
                     margin-bottom: 32px;
                     @media (max-width: $local-max-width) {
                         width: 100%;
+                        height: auto;
+                        display: block;
+                        margin: auto;
                     }
                 }
 
                 &__label {
                     color: $carbon-900;
                     font-size: 28px;
-                    margin-bottom: 32px;
+                    font-weight: normal;
+                    margin: 0px 0px 32px 0px;
                 }
 
                 &__description {
                     font-size: 16px;
                     color: $carbon-400;
                     text-align: justify;
+                    margin: 0px;
+                    font-weight: lighter;
                 }
             }
 
@@ -56,18 +64,21 @@ $local-max-width: 1140px;
                 &__sold {
                     font-size: 14px;
                     color: $carbon-700;
-                    margin-bottom: 14px;
+                    margin: 0px 0px 14px 0px;
+                    font-weight: normal;
                 }
 
                 &__title {
                     font-size: 24px;
-                    margin-bottom: 32px;
                     padding-right: 40px;
+                    margin: 0px 0px 32px 0px;
+                    font-weight: normal;
                 }
 
                 &__amount {
                     font-size: 46px;
-                    margin-bottom: 32px;
+                    margin: 0px 0px 32px 0px;
+                    font-weight: normal;
                 }
 
                 &__button{

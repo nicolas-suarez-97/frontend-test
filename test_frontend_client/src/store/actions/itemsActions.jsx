@@ -16,7 +16,6 @@ export function getItemsAction(query) {
         dispatch(setQuery(query));
         try {
             const response = await axiosClient.get(`items?q=${query}`);
-            console.log('abc response',response);
             dispatch(getApiItemsSuccess(response.data));
         } catch (error) {
             dispatch(getApiItemsError());
@@ -29,7 +28,6 @@ export function getItemByIdAction(id) {
         dispatch(getApiItemById());
         try {
             const response = await axiosClient.get(`items/${id}`);
-            console.log('abc item by id',response);
             dispatch(getApiItemByIdSuccess(response.data));
         } catch (error) {
             dispatch(getApiItemByIdError());
